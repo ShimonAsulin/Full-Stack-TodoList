@@ -1,0 +1,54 @@
+@use "../../styles/colors.scss";
+
+.button {
+  background-color: transparent;
+  border: none;
+  margin: 0.5em;
+}
+.todoContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+
+  &__title-description {
+    text-transform: capitalize;
+    // line-height: 1.1em;
+    width: 60%;
+    overflow-x: auto;
+    white-space: nowrap;
+
+    h4 {
+        
+    }
+    h5 {
+      font-weight: 400;
+    }
+  }
+
+  &button-container {
+    
+    width: 40%;
+  }
+}
+
+
+::-webkit-scrollbar {
+    height: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #6d0000; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: colors.$green-2; 
+    border-radius: 3px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: colors.$green-3; 
+  }

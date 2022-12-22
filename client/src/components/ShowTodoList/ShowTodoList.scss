@@ -1,0 +1,85 @@
+@use "../../styles/colors";
+
+
+
+.container {
+  background-color: #fff;
+  color: colors.$gray-3;
+  width: 80vw;
+  max-width: 700px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+.contents {
+  padding: 1em;
+  
+  &__title {
+    color: colors.$green-4;
+    text-align: center;
+    margin: 1em;
+  }
+  &__dates {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5em;
+  }
+  &__date {
+    display: flex;
+  }
+  &__date-section-1 {
+    margin-right: 0.3em;
+    display: flex;
+    align-items: center;
+    height: 24px;
+    // line-height: 40px;
+  }
+  &__date-day {
+    font-size: 2.2em;
+    font-weight: 700;
+  }
+  &__date-section-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    line-height: 10px;
+  }
+  &__date-month {
+    font-size: 0.8em;
+    font-weight: 700;
+  }
+  &__date-year {
+    font-size: 0.8em;
+  }
+  &__date-dayName {
+    font-weight: 600;
+    letter-spacing: -1px;
+  }
+
+  &__list {
+    list-style: none;
+    min-height: 100px;
+    max-height: 300px;
+    overflow-y: auto;
+  }
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: colors.$green-2; 
+    border-radius: 3px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: colors.$green-3; 
+  }

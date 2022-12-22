@@ -1,0 +1,105 @@
+@use "../../styles/colors";
+
+.popup {
+  position: fixed;
+  background: #868585ac;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
+
+.popup__form {
+  position: relative;
+  width: 80vw;
+  max-width: 700px;
+  margin: 0 auto;
+  height: auto;
+  max-height: 70vh;
+  margin-top: calc(100vh - 70vh);
+  background: #fff;
+  border-radius: 4px;
+  padding: 20px;
+  border: 1px solid #999;
+  overflow: auto;
+
+  &-input {
+    padding: 0.3em 0.6em;
+    border: 1px solid colors.$gray-1;
+    border-radius: 3px;
+  }
+
+  &-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    * {
+      margin-bottom: 0.7em;
+    }
+  }
+
+  &-submit {
+    font-weight: 700;
+    cursor: pointer;
+    padding: 0.5em;
+    transition: all 1s;
+    &:hover {
+      color: colors.$green-4;
+      border: 2px solid colors.$green-4;
+      border-radius: 5px;
+    }
+  }
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.popup__close-icon {
+  content: "x";
+  color: rgba(153, 153, 153, 0.655);
+  cursor: pointer;
+  position: relative;
+  bottom: 10px;
+  background-color: colors.$green-3;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  font-size: 2rem;
+  border: none;
+  transition: color 200ms;
+
+  &:hover {
+    color: colors.$green-1;
+  }
+}
+
+.create__todo {
+  &-btn-div {
+    color: red;
+  }
+  &__add-btn {
+    content: "x";
+    color: rgba(153, 153, 153, 0.655);
+    cursor: pointer;
+    position: relative;
+    bottom: 10px;
+    background: colors.$green-3;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    line-height: 20px;
+    text-align: center;
+    font-size: 2rem;
+    border: none;
+    transition: color 200ms;
+
+    &:hover {
+      color: colors.$green-1;
+    }
+  }
+}
