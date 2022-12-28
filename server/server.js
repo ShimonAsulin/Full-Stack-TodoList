@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const path = require("path");
 const connectDB = require("./config/db");
-const cors = require('cors')
+const cors = require("cors");
 const app = express();
 
 // routes
@@ -14,11 +14,14 @@ connectDB();
 app.use(cors({ origin: true, credentials: true }));
 
 // initialize middleware
-app.use(express.json({ extendedd: false })); //{extendedd:false}
+app.use(express.json({ extendedd: false }));
+app.use(express.static(path.join(__dirname, "..", "client", "build")));
+
+app.get("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"))
+);
+
 // app.get("/", (req, res) => res.send("Server up and running!"));
-app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, "..", 'client', 'build', 'index.html'));
-});
 
 // use routes
 app.use("/api/todo", todo);

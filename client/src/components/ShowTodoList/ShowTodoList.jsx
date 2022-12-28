@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { UpdateTodo } from "../UpdateTodo/UpdateTodo";
 import { TodoCard } from "../TodoCard/TodoCard";
-import "./ShowTodoList.scss";
+import "./ShowTodoList.css";
 import { CreateTodo } from "../CreateTodo/CreateTodo";
 
 export function ShowTodoList() {

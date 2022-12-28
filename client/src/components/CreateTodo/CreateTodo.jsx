@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./CreateTodo.scss";
+import "./CreateTodo.css";
 import axios from "axios";
 
 export function CreateTodo(props) {
