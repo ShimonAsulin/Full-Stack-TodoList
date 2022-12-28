@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./CreateTodo.scss";
 import axios from "axios";
 
-export function CreateTodo() {
+export function CreateTodo(props) {
   const [data, setData] = useState({ title: "", description: "" });
   const [isOpen, setIsOpen] = useState(false);
 
@@ -13,20 +13,22 @@ export function CreateTodo() {
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e) {
-    // e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    togglePopup();
 
-    axios
-      .post("http://localhost:8000/api/todo", data)
-      .then((res) => {
-        setData({ title: "", description: "" });
-        console.log(res.data.message);
-      })
-      .catch((err) => {
-        console.log("Error couldn't create TODO");
-        console.log(err.message);
-      });
-  }
+    const post = await axios.post("http://localhost:8000/api/todo", data);
+
+    try {
+      setData({ title: "", description: "" });
+      console.log(post.data.message);
+    } catch (err) {
+      console.log("Error couldn't create TODO");
+      console.log(err.message);
+    }
+
+    props.handleGetTodo();
+  };
 
   return (
     <section className="create__todo">
@@ -38,7 +40,7 @@ export function CreateTodo() {
 
       {isOpen && (
         <section className="popup">
-          <form onSubmit={handleSubmit} className="popup__form" noValidate>
+          <form onSubmit={handleSubmit} className="popup__form">
             <div className="popup__form-inputs">
               <label className="label" htmlFor="title">
                 Title
@@ -49,6 +51,7 @@ export function CreateTodo() {
                 value={data.title}
                 onChange={handleChange}
                 className="popup__form-input"
+                required
               />
               <label className="label" htmlFor="description">
                 Description
@@ -59,6 +62,7 @@ export function CreateTodo() {
                 value={data.description}
                 onChange={handleChange}
                 className="popup__form-input"
+                required
               />
               <button type="submit" className="popup__form-submit button">
                 Create Todo

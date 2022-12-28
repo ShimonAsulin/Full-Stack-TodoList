@@ -11,20 +11,19 @@ export function ShowTodoList() {
   const [id, setId] = useState("");
   const [update, setUpdate] = useState(false);
 
-  useEffect(
-    function () {
-      axios
-        .get("http://localhost:8000/api/todo")
-        .then((res) => {
-          console.log(res.data);
-          setTodo(res.data);
-        })
-        .catch((err) => {
-          console.log(err.message);
-        });
-    },
-    [update]
-  );
+  const handleGetTodo = async () => {
+    const res = await axios.get("http://localhost:8000/api/todo");
+    try {
+      console.log(res.data);
+      setTodo(res.data);
+    } catch {
+      console.log("error");
+    }
+  };
+
+  useEffect(() => {
+    handleGetTodo();
+  }, [update]);
 
   function handleEdit(e) {
     setId(e.target.name);
@@ -83,7 +82,6 @@ export function ShowTodoList() {
             />
           ))}
         </ul>
-        <CreateTodo />
       </section>
       {open ? (
         <section className="update-container">
@@ -98,6 +96,9 @@ export function ShowTodoList() {
       ) : (
         ""
       )}
+      <div className="center">
+        <CreateTodo handleGetTodo={handleGetTodo} />
+      </div>
     </section>
   );
 }
