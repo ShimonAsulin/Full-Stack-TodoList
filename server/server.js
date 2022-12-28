@@ -17,7 +17,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extendedd: false })); //{extendedd:false}
 // app.get("/", (req, res) => res.send("Server up and running!"));
 app.get('/', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, "..", 'client', 'build', 'index.html'));
 });
 
 // use routes
