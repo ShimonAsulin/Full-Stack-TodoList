@@ -15,7 +15,7 @@ export function UpdateTodo({ _id, handleClose, handleUpdate }) {
     console.log({ _id }, { data });
 
     axios
-      .put(`https://fullstack-todolisd.onrender.com/api/todo/${_id}`, data)
+      .put(`http://localhost:8000/api/todo/${_id}`, data)
       .then((res) => {
         setData({ title: "", description: "" });
         console.log(res.data.message);
