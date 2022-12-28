@@ -12,7 +12,7 @@ export function ShowTodoList() {
   const [update, setUpdate] = useState(false);
 
   const handleGetTodo = async () => {
-    const res = await axios.get("http://localhost:8000/api/todo");
+    const res = await axios.get("https://fullstack-todolisd.onrender.com/api/todo");
     try {
       console.log(res.data);
       setTodo(res.data);
@@ -36,7 +36,7 @@ export function ShowTodoList() {
   }
 
   function handleDelete(e) {
-    axios.delete(`http://localhost:8000/api/todo/${e.target.name}`);
+    axios.delete(`https://fullstack-todolisd.onrender.com/api/todo/${e.target.name}`);
 
     setTodo((data) => {
       return data.filter((todo) => todo._id !== e.target.name);

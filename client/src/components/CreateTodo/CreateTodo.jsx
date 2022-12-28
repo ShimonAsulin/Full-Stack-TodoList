@@ -17,7 +17,7 @@ export function CreateTodo(props) {
     e.preventDefault();
     togglePopup();
 
-    const post = await axios.post("http://localhost:8000/api/todo", data);
+    const post = await axios.post("https://fullstack-todolisd.onrender.com/api/todo", data);
 
     try {
       setData({ title: "", description: "" });
