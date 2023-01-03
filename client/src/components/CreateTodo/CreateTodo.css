@@ -12,17 +12,21 @@
   width: 80vw;
   max-width: 700px;
   margin: 0 auto;
-  height: auto;
+  height: 40vh;
   max-height: 70vh;
   margin-top: 30vh;
   background: #fff;
   border-radius: 4px;
-  padding: 20px;
   border: 1px solid #999;
   overflow: auto;
+  color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .popup__form-input {
-  padding: 0.3em 0.6em;
+  padding: 0.6em 1.5em;
+  margin: 0.4em;
   border: 1px solid #CFD0D5;
   border-radius: 3px;
 }
@@ -35,13 +39,14 @@
   margin-bottom: 0.7em;
 }
 .popup__form-submit {
+  color: #000;
+  font-size: 1em;
   font-weight: 700;
   cursor: pointer;
   padding: 0.5em;
-  transition: all 1s;
+  transition: border 1s;
 }
 .popup__form-submit:hover {
-  color: #5CD6A0;
   border: 2px solid #5CD6A0;
   border-radius: 5px;
 }
@@ -56,7 +61,7 @@
   color: rgba(153, 153, 153, 0.655);
   cursor: pointer;
   position: relative;
-  bottom: 10px;
+  top: 20px;
   background-color: #51E3A4;
   width: 50px;
   height: 50px;
@@ -71,9 +76,6 @@
   color: #D7E6E1;
 }
 
-.create__todo-btn-div {
-  color: red;
-}
 .create__todo__add-btn {
   content: "x";
   color: rgba(153, 153, 153, 0.655);

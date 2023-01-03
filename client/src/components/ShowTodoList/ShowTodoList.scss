@@ -1,7 +1,5 @@
 @use "../../styles/colors";
 
-
-
 .container {
   background-color: #fff;
   color: colors.$gray-3;
@@ -10,9 +8,9 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-.contents {
+.content {
   padding: 1em;
-  
+
   &__title {
     color: colors.$green-4;
     text-align: center;
@@ -62,24 +60,37 @@
     max-height: 300px;
     overflow-y: auto;
   }
+  &__submit {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top: 35px;
+  }
 }
 
 ::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  ::-webkit-scrollbar {
+    display: block;
     width: 5px;
+  }
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
+  background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: colors.$green-2; 
-    border-radius: 3px;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: colors.$green-3; 
-  }
+  background: colors.$green-2;
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: colors.$green-3;
+}

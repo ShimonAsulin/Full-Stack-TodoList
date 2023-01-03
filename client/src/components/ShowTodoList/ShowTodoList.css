@@ -6,61 +6,73 @@
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
-.contents {
+.content {
   padding: 1em;
 }
-.contents__title {
+.content__title {
   color: #5CD6A0;
   text-align: center;
   margin: 1em;
 }
-.contents__dates {
+.content__dates {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5em;
 }
-.contents__date {
+.content__date {
   display: flex;
 }
-.contents__date-section-1 {
+.content__date-section-1 {
   margin-right: 0.3em;
   display: flex;
   align-items: center;
   height: 24px;
 }
-.contents__date-day {
+.content__date-day {
   font-size: 2.2em;
   font-weight: 700;
 }
-.contents__date-section-2 {
+.content__date-section-2 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   line-height: 10px;
 }
-.contents__date-month {
+.content__date-month {
   font-size: 0.8em;
   font-weight: 700;
 }
-.contents__date-year {
+.content__date-year {
   font-size: 0.8em;
 }
-.contents__date-dayName {
+.content__date-dayName {
   font-weight: 600;
   letter-spacing: -1px;
 }
-.contents__list {
+.content__list {
   list-style: none;
   min-height: 100px;
   max-height: 300px;
   overflow-y: auto;
 }
-
-::-webkit-scrollbar {
-  width: 5px;
+.content__submit {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 35px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  ::-webkit-scrollbar {
+    display: block;
+    width: 5px;
+  }
+}
 /* Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1;

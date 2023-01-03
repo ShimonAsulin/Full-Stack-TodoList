@@ -12,9 +12,11 @@ export function ShowTodoList() {
   const [update, setUpdate] = useState(false);
 
   const handleGetTodo = async () => {
-    const res = await axios.get("https://fullstack-todolisd.onrender.com/api/todo");
+    const res = await axios.get(
+      "https://fullstack-todolisd.onrender.com/api/todo"
+    );
     try {
-      console.log(res.data);
+      // console.log(res.data);
       setTodo(res.data);
     } catch {
       console.log("error");
@@ -31,12 +33,13 @@ export function ShowTodoList() {
   }
 
   function handleUpdate() {
-    // console.log("update:", update, !update);
     setUpdate(!update);
   }
 
   function handleDelete(e) {
-    axios.delete(`https://fullstack-todolisd.onrender.com/api/todo/${e.target.name}`);
+    axios.delete(
+      `https://fullstack-todolisd.onrender.com/api/todo/${e.target.name}`
+    );
 
     setTodo((data) => {
       return data.filter((todo) => todo._id !== e.target.name);
@@ -58,21 +61,21 @@ export function ShowTodoList() {
 
   return (
     <section className="container">
-      <section className="contents">
-        <h1 className="contents__title">FullStack Todo</h1>
-        <div className="contents__dates">
-          <div className="contents__date">
-            <div className="contents__date-section-1">
-              <p className="contents__date-day">{day}</p>
+      <section className="content">
+        <h1 className="content__title">FullStack Todo</h1>
+        <div className="content__dates">
+          <div className="content__date">
+            <div className="content__date-section-1">
+              <p className="content__date-day">{day}</p>
             </div>
-            <div className="contents__date-section-2">
-              <p className="contents__date-month">{month}</p>
-              <p className="contents__date-year">{year}</p>
+            <div className="content__date-section-2">
+              <p className="content__date-month">{month}</p>
+              <p className="content__date-year">{year}</p>
             </div>
           </div>
-          <div className="contents__date-dayName">{dayName}</div>
+          <div className="content__date-dayName">{dayName}</div>
         </div>
-        <ul className="contents__list">
+        <ul className="content__list">
           {todo.map((data) => (
             <TodoCard
               key={data._id}
@@ -88,6 +91,7 @@ export function ShowTodoList() {
           <div className="update-contents">
             <UpdateTodo
               _id={id}
+              todo={todo}
               handleClose={handleClose}
               handleUpdate={handleUpdate}
             />
@@ -96,7 +100,7 @@ export function ShowTodoList() {
       ) : (
         ""
       )}
-      <div className="center">
+      <div className="content__submit">
         <CreateTodo handleGetTodo={handleGetTodo} />
       </div>
     </section>
