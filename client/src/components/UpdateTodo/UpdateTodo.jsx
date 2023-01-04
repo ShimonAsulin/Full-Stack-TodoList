@@ -3,10 +3,7 @@ import axios from "axios";
 import "./UpdateTodo.scss";
 
 export function UpdateTodo({ _id, handleClose, handleUpdate, todo }) {
-  const [data, setData] = useState({ title: "", description: "" });
-  const [value, setValue] = useState(todo);
-
-  setValue(value.filter((value) => value._id === _id));
+  const [data, setData] = useState(todo.find((task) => task._id === _id));
 
   function handleChange(e) {
     setData((data) => ({ ...data, [e.target.name]: e.target.value }));
@@ -45,7 +42,7 @@ export function UpdateTodo({ _id, handleClose, handleUpdate, todo }) {
             type="text"
             name="title"
             className="popup__update-form-input"
-            // value={todo[0].title}
+            value={data.title}
             onChange={handleChange}
             required
           />
@@ -53,11 +50,12 @@ export function UpdateTodo({ _id, handleClose, handleUpdate, todo }) {
             Description
           </label>
           <input
+            value={data.description}
             type="text"
             name="description"
             className="popup__update-form-input"
             onChange={handleChange}
-            // required
+            required
           />
           <button type="submit" className="popup__update-form-submit button">
             Submit
