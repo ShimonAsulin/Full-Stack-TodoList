@@ -1,6 +1,6 @@
 const crypto = require("crypto");
 const Todo = require("../models/todo");
-
+const token = process.env.ZOOM_WEBHOOK_SECRET_TOKEN;
 exports.getAllTodo = (req, res) => {
   Todo.find()
     .then((todo) => res.json(todo))
@@ -23,7 +23,7 @@ exports.zoomCheck = (req, res) => {
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
-      .createHmac("sha256", nFmrNDXkSKmr87NRy1j8hg)
+      .createHmac("sha256", token)
       .update(req.body.payload.plainToken)
       .digest("hex");
 
