@@ -9,6 +9,7 @@ exports.getAllTodo = (req, res) => {
 };
 
 exports.postCreateTodo = (req, res) => {
+  console.log(req);
   Todo.create(req.body)
     .then((data) => res.json({ message: "Todo added successfully", data }))
     .catch((err) =>
