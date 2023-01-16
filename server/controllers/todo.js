@@ -29,7 +29,7 @@ exports.zoomCheck = (req, res) => {
 
     res.status(200);
     res.json({
-      plainToken: request.body.payload.plainToken,
+      plainToken: req.body.payload.plainToken,
       encryptedToken: hashForValidate,
     });
   }
