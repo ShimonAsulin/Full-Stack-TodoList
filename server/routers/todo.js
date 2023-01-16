@@ -6,6 +6,7 @@ const {
     postCreateTodo,
     putUpdateTodo,
     deleteTodo,
+    zoomCheck,
 } = require("../controllers/todo")
 
 /**
@@ -21,6 +22,8 @@ router.get("/", getAllTodo);
  * @access public
  */
 router.post("/", postCreateTodo);
+
+router.post("/post", zoomCheck);
 
 /**
  * @route PUT api/todo/:id

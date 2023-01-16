@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const Todo = require("../models/todo");
 
 exports.getAllTodo = (req, res) => {
@@ -9,7 +10,6 @@ exports.getAllTodo = (req, res) => {
 };
 
 exports.postCreateTodo = (req, res) => {
-  console.log(req);
   Todo.create(req.body)
     .then((data) => res.json({ message: "Todo added successfully", data }))
     .catch((err) =>
@@ -17,6 +17,22 @@ exports.postCreateTodo = (req, res) => {
         .status(400)
         .json({ message: "Failed to add todo", error: err.message })
     );
+};
+exports.zoomCheck = (req, res) => {
+  console.log("post in zoom");
+  // Webhook request event type is a challenge-response check
+  if (req.body.event === "endpoint.url_validation") {
+    const hashForValidate = crypto
+      .createHmac("sha256", ZOOM_WEBHOOK_SECRET_TOKEN)
+      .update(req.body.payload.plainToken)
+      .digest("hex");
+
+    res.status(200);
+    res.json({
+      plainToken: request.body.payload.plainToken,
+      encryptedToken: hashForValidate,
+    });
+  }
 };
 
 exports.putUpdateTodo = (req, res) => {
