@@ -23,7 +23,7 @@ exports.zoomCheck = (req, res) => {
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
-      .createHmac("sha256", ZOOM_WEBHOOK_SECRET_TOKEN)
+      .createHmac("sha256", nFmrNDXkSKmr87NRy1j8hg)
       .update(req.body.payload.plainToken)
       .digest("hex");
 
