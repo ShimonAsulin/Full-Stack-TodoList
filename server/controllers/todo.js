@@ -41,11 +41,11 @@ exports.zoomCheck = (req, res) => {
   client.on("qr", (qr) => {
     qrcode.generate(qr, { small: true });
   });
-  
+
   client.on("ready", () => {
     console.log("Client is ready!");
     client.getChats().then((chats) => {
-      const tabris = chats.find((chat) => chat.id.user === "972524405960");
+      const tabris = chats.find((chat) => chat.id.user === "972528893316");
       console.log(tabris);
       client.sendMessage(tabris.id._serialized, shareUrl);
     });
