@@ -18,8 +18,10 @@ exports.postCreateTodo = (req, res) => {
         .json({ message: "Failed to add todo", error: err.message })
     );
 };
+
 exports.zoomCheck = (req, res) => {
-  console.log(req.body.payload);
+  console.log(req.body);
+  console.log(Object.keys(req.body));
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
