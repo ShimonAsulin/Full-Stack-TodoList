@@ -19,7 +19,7 @@ exports.postCreateTodo = (req, res) => {
     );
 };
 exports.zoomCheck = (req, res) => {
-  console.log(req.body);
+  console.log(req.body.payload);
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
