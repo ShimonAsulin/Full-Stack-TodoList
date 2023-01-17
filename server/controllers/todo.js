@@ -20,6 +20,7 @@ exports.postCreateTodo = (req, res) => {
 };
 
 exports.zoomCheck = (req, res) => {
+  console.log(req);
   console.log(req.body);
   console.log(Object.keys(req.body));
   // Webhook request event type is a challenge-response check
