@@ -1,6 +1,20 @@
 const crypto = require("crypto");
 const Todo = require("../models/todo");
 const token = process.env.ZOOM_WEBHOOK_SECRET_TOKEN;
+const qrcode = require("qrcode-terminal");
+const { Client, LocalAuth } = require("whatsapp-web.js");
+
+const client = new Client({
+  authStrategy: new LocalAuth(),
+});
+
+client.on("qr", (qr) => {
+  qrcode.generate(qr, { small: true });
+});
+
+
+
+
 
 exports.getAllTodo = (req, res) => {
   Todo.find()
@@ -22,6 +36,20 @@ exports.postCreateTodo = (req, res) => {
 
 exports.zoomCheck = (req, res) => {
   console.log(req.body.payload.object.share_url);
+  const shareUrl = req.body.payload.object.share_url
+
+  // zoom
+
+  client.on("ready", () => {
+    console.log("Client is ready!");
+    client.getChats().then((chats) => {
+      const tabris = chats.find((chat) => chat.id.user === "972524405960");
+      console.log(tabris);
+      client.sendMessage(tabris.id._serialized, shareUrl);
+    });
+  });
+
+  // ///
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
@@ -54,3 +82,6 @@ exports.deleteTodo = (req, res) => {
       res.status(404).json({ message: "book not found", error: err.message })
     );
 };
+
+client.initialize();
+
