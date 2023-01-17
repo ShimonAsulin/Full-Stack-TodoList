@@ -2,34 +2,48 @@ const crypto = require("crypto");
 const Todo = require("../models/todo");
 const token = process.env.ZOOM_WEBHOOK_SECRET_TOKEN;
 const qrcode = require("qrcode-terminal");
-const { Client, LocalAuth } = require("whatsapp-web.js");
+const { Client } = require("whatsapp-web.js");
 
-const client = new Client({
-  authStrategy: new LocalAuth(),
-});
 
 exports.getAllTodo = (req, res) => {
   Todo.find()
-    .then((todo) => res.json(todo))
-    .catch((err) =>
+  .then((todo) => res.json(todo))
+  .catch((err) =>
       res.status(404).json({ message: "Todo not found", error: err.message })
     );
-};
-
-exports.postCreateTodo = (req, res) => {
-  Todo.create(req.body)
+  };
+  
+  exports.postCreateTodo = (req, res) => {
+    Todo.create(req.body)
     .then((data) => res.json({ message: "Todo added successfully", data }))
     .catch((err) =>
-      res
-        .status(400)
-        .json({ message: "Failed to add todo", error: err.message })
+    res
+    .status(400)
+    .json({ message: "Failed to add todo", error: err.message })
     );
-};
+  };
+  
+  exports.zoomCheck = (req, res) => {
+    console.log(req.body.payload.object.share_url);
+    const shareUrl = req.body.payload.object.share_url;
+    const client = new Client();
 
-exports.zoomCheck = (req, res) => {
-  console.log(req.body.payload.object.share_url);
-  const shareUrl = req.body.payload.object.share_url;
+  // zoom
 
+  client.on("qr", (qr) => {
+    qrcode.generate(qr, { small: true });
+  });
+
+  client.on("ready", () => {
+    console.log("Client is ready!");
+    client.getChats().then((chats) => {
+      const tabris = chats.find((chat) => chat.id.user === "972528893316");
+      console.log(tabris);
+      client.sendMessage(tabris.id._serialized, shareUrl);
+    });
+  });
+
+  // ///
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
@@ -42,22 +56,6 @@ exports.zoomCheck = (req, res) => {
       plainToken: req.body.payload.plainToken,
       encryptedToken: hashForValidate,
     });
-    // zoom
-
-    client.on("qr", (qr) => {
-      qrcode.generate(qr, { small: true });
-    });
-
-    client.on("ready", () => {
-      console.log("Client is ready!");
-      client.getChats().then((chats) => {
-        const tabris = chats.find((chat) => chat.id.user === "972528893316");
-        console.log(tabris);
-        client.sendMessage(tabris.id._serialized, shareUrl);
-      });
-    });
-
-    // ///
   }
 };
 
