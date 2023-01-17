@@ -20,13 +20,8 @@ exports.postCreateTodo = (req, res) => {
 };
 
 exports.zoomCheck = (req, res) => {
-  console.log(req.body);
-  console.log("req.body.object");
-  console.log(req.body.object);
-  console.log("req.body.event");
-  console.log(req.body.event);
-  console.log("req.body.payload.object");
-  console.log(req.body.payload.object);
+ 
+  console.log(req.body.payload.object.share_url);
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
