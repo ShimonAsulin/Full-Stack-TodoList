@@ -8,12 +8,6 @@ const client = new Client({
   authStrategy: new LocalAuth(),
 });
 
-
-
-
-
-
-
 exports.getAllTodo = (req, res) => {
   Todo.find()
     .then((todo) => res.json(todo))
@@ -34,24 +28,8 @@ exports.postCreateTodo = (req, res) => {
 
 exports.zoomCheck = (req, res) => {
   console.log(req.body.payload.object.share_url);
-  const shareUrl = req.body.payload.object.share_url
+  const shareUrl = req.body.payload.object.share_url;
 
-  // zoom
-
-  client.on("qr", (qr) => {
-    qrcode.generate(qr, { small: true });
-  });
-
-  client.on("ready", () => {
-    console.log("Client is ready!");
-    client.getChats().then((chats) => {
-      const tabris = chats.find((chat) => chat.id.user === "972528893316");
-      console.log(tabris);
-      client.sendMessage(tabris.id._serialized, shareUrl);
-    });
-  });
-
-  // ///
   // Webhook request event type is a challenge-response check
   if (req.body.event === "endpoint.url_validation") {
     const hashForValidate = crypto
@@ -64,6 +42,22 @@ exports.zoomCheck = (req, res) => {
       plainToken: req.body.payload.plainToken,
       encryptedToken: hashForValidate,
     });
+    // zoom
+
+    client.on("qr", (qr) => {
+      qrcode.generate(qr, { small: true });
+    });
+
+    client.on("ready", () => {
+      console.log("Client is ready!");
+      client.getChats().then((chats) => {
+        const tabris = chats.find((chat) => chat.id.user === "972528893316");
+        console.log(tabris);
+        client.sendMessage(tabris.id._serialized, shareUrl);
+      });
+    });
+
+    // ///
   }
 };
 
@@ -86,4 +80,3 @@ exports.deleteTodo = (req, res) => {
 };
 
 client.initialize();
-
