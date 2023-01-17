@@ -8,9 +8,7 @@ const client = new Client({
   authStrategy: new LocalAuth(),
 });
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
-});
+
 
 
 
@@ -40,6 +38,10 @@ exports.zoomCheck = (req, res) => {
 
   // zoom
 
+  client.on("qr", (qr) => {
+    qrcode.generate(qr, { small: true });
+  });
+  
   client.on("ready", () => {
     console.log("Client is ready!");
     client.getChats().then((chats) => {
