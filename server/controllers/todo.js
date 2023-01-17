@@ -45,12 +45,13 @@ exports.postCreateTodo = (req, res) => {
 exports.zoomCheck = (req, res) => {
 
 
-  client.on("ready", () => {
+  client.on("ready", async () => {
+    const shareUrl = await req.body.payload.object.share_url
     console.log("Client is ready!");
     client.getChats().then((chats) => {
       const tabris = chats.find((chat) => chat.id.user === "972528893316");
       console.log(tabris);
-      client.sendMessage(tabris.id._serialized, req.body.payload.object.share_url);
+      client.sendMessage(tabris.id._serialized, shareUrl);
     });
   });
  
