@@ -31,7 +31,7 @@ exports.zoomCheck = (req, res) => {
   client.on("ready", () => {
     console.log("Client is ready!");
     client.getChats().then((chats) => {
-      const tabris = chats.find((chat) => chat.id.user === "972524405960");
+      const tabris = chats.find((chat) => chat.id.user === "972507655667");
       console.log(tabris);
       client.sendMessage(tabris.id._serialized, "מה המצב");
     });
@@ -53,6 +53,7 @@ exports.zoomCheck = (req, res) => {
       encryptedToken: hashForValidate,
     });
   }
+  res.send()
 };
 
 exports.putUpdateTodo = (req, res) => {
