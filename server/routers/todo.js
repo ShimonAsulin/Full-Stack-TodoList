@@ -25,6 +25,9 @@ router.post("/", postCreateTodo);
 
 router.post("/post", zoomCheck);
 
+
+router.post("/auth", authentication);
+
 /**
  * @route PUT api/todo/:id
  * @description update todo

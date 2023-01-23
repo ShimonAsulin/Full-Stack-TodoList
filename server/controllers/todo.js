@@ -3,7 +3,7 @@ const { Client } = require("whatsapp-web.js");
 const crypto = require("crypto");
 const Todo = require("../models/todo");
 const token = process.env.ZOOM_WEBHOOK_SECRET_TOKEN;
-const client = new Client()
+const client = new Client();
 exports.getAllTodo = (req, res) => {
   Todo.find()
     .then((todo) => res.json(todo))
@@ -23,21 +23,19 @@ exports.postCreateTodo = (req, res) => {
 };
 
 exports.zoomCheck = (req, res) => {
-
-  client.on("qr", (qr) => {
-    qrcode.generate(qr, { small: true });
-  });
-
-  client.on("ready", () => {
-    console.log("Client is ready!");
-    client.getChats().then((chats) => {
-      const tabris = chats.find((chat) => chat.id.user === "972507655667");
+  client.on("ready", async () => {
+    try {
+      console.log("Client is ready!");
+      const client = await client.getChats();
+      const tabris = await client.find(
+        (chat) => chat.id.user === "972507655667"
+      );
       console.log(tabris);
       client.sendMessage(tabris.id._serialized, "מה המצב");
-    });
+    } catch (error) {
+      console.log(error);
+    }
   });
-
-  client.initialize();
 
   console.log(req.body.payload.object.share_url);
   // Webhook request event type is a challenge-response check
@@ -53,7 +51,13 @@ exports.zoomCheck = (req, res) => {
       encryptedToken: hashForValidate,
     });
   }
-  res.send()
+  res.send();
+};
+
+exports.authentication = (req, res) => {
+  client.on("qr", (qr) => {
+    res.send(qrcode.generate(qr, { small: true }));
+  });
 };
 
 exports.putUpdateTodo = (req, res) => {
