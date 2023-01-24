@@ -2,12 +2,13 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getAllTodo,
-    postCreateTodo,
-    putUpdateTodo,
-    deleteTodo,
-    zoomCheck,
-} = require("../controllers/todo")
+  getAllTodo,
+  postCreateTodo,
+  putUpdateTodo,
+  deleteTodo,
+  zoomCheck,
+  authentication,
+} = require("../controllers/todo");
 
 /**
  * @route GET api/todo
@@ -24,7 +25,6 @@ router.get("/", getAllTodo);
 router.post("/", postCreateTodo);
 
 router.post("/post", zoomCheck);
-
 
 router.post("/auth", authentication);
 
@@ -43,5 +43,3 @@ router.put("/:id", putUpdateTodo);
 router.delete("/:id", deleteTodo);
 
 module.exports = router;
-
-
